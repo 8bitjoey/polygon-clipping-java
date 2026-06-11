@@ -1,0 +1,10 @@
+# reference clone, never committed
+upstream/
+
+# build output
+target/
+
+# editors / OS
+.idea/
+*.iml
+.DS_Store

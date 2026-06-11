@@ -1,0 +1,10 @@
+polygonclip — Java port of polygon-clipping
+Copyright (c) 2026 Alexey Starshinov
+
+This product is a port of the JavaScript library polygon-clipping
+(https://github.com/mfogel/polygon-clipping), Copyright (c) 2018 Mike Fogel,
+distributed under the MIT license. See LICENSE.
+
+The underlying algorithm: F. Martínez, C. Ogayar, J.R. Jiménez, A.J. Rueda,
+"A simple algorithm for Boolean operations on polygons" — the Martínez–Rueda–Feito
+family of sweep-line algorithms (2009/2013).
