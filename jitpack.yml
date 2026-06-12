@@ -1,5 +1,10 @@
 jdk:
   - openjdk17
 install:
-  - mvn -B -f lib/pom.xml versions:set -DnewVersion=$VERSION -DgenerateBackupPoms=false
-  - mvn -B -f lib/pom.xml -DskipTests install
+  # JitPack's bundled Maven predates maven-compiler-plugin 3.13.0 (needs >= 3.6.3);
+  # fetch a modern Maven and build with it. JitPack-only concern — does not affect the
+  # artifact. versions:set pins the built version to the git tag JitPack serves.
+  - curl -fsSL https://archive.apache.org/dist/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.tar.gz -o /tmp/mvn.tgz
+  - tar xzf /tmp/mvn.tgz -C /tmp
+  - /tmp/apache-maven-3.9.9/bin/mvn -B -f lib/pom.xml versions:set -DnewVersion=$VERSION -DgenerateBackupPoms=false
+  - /tmp/apache-maven-3.9.9/bin/mvn -B -f lib/pom.xml -DskipTests install
