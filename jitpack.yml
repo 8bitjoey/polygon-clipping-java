@@ -1,0 +1,5 @@
+jdk:
+  - openjdk17
+install:
+  - mvn -B -f lib/pom.xml versions:set -DnewVersion=$VERSION -DgenerateBackupPoms=false
+  - mvn -B -f lib/pom.xml -DskipTests install
