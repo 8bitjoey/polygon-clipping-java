@@ -51,14 +51,14 @@ Deliberate behavior-relevant deviations from the upstream implementation are doc
 `DEVIATIONS.md`; everything else is a verbatim transliteration, down to floating-point
 operation order.
 
-Differential debugging harness: `TraceLog`/`TraceRunner` on the Java side and `oracle/`
+Differential debugging harness: `TraceLog`/`TraceRunner` on the Java side and `reference/`
 (an instrumented copy of the upstream source) on the JS side. Both expect a clone of the
 upstream repo at `upstream/` (gitignored):
 
 ```
 git clone https://github.com/mfogel/polygon-clipping upstream
 npm --prefix upstream install
-node oracle/instrument.mjs && node oracle/run.mjs <fixture> <op> <outFile>
+node reference/instrument.mjs && node reference/run.mjs <fixture> <op> <outFile>
 ```
 
 The JS side of `bench/bench.mjs` additionally needs `npm --prefix upstream run build`.

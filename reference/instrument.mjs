@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * Rebuilds oracle/src/ from upstream/src/ with trace instrumentation.
- * Run: node oracle/instrument.mjs
+ * Rebuilds reference/src/ from upstream/src/ with trace instrumentation.
+ * Run: node reference/instrument.mjs
  * Exits non-zero if any anchor is missing (staleness alarm).
  */
 
@@ -12,7 +12,7 @@ import path from "path"
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const REPO = path.resolve(__dirname, "..")
 const SRC_DIR = path.join(REPO, "upstream", "src")
-const OUT_DIR = path.join(REPO, "oracle", "src")
+const OUT_DIR = path.join(REPO, "reference", "src")
 
 // ─── helpers ────────────────────────────────────────────────────────────────
 
@@ -38,7 +38,7 @@ const SplayTree = _req("splaytree")`
 const ROBUST_ESM = `import { orient2d } from "robust-predicates"`
 const ROBUST_FIXED = `import { orient2d } from "../../upstream/node_modules/robust-predicates/index.js"`
 
-// ─── wipe & recreate oracle/src ─────────────────────────────────────────────
+// ─── wipe & recreate reference/src ─────────────────────────────────────────────
 
 rmSync(OUT_DIR, { recursive: true, force: true })
 mkdirSync(OUT_DIR, { recursive: true })
@@ -264,6 +264,6 @@ for (const [file, count] of Object.entries(stats).sort()) {
   console.log(`  ${file}: ${count} insertion(s)`)
   total += count
 }
-console.log(`  trace.js: written (oracle-side)`)
+console.log(`  trace.js: written (reference-side)`)
 console.log(`  TOTAL: ${total} insertions across ${jsFiles.length} files`)
-console.log("\nDone. oracle/src/ is ready.")
+console.log("\nDone. reference/src/ is ready.")

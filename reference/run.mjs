@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 /**
- * Run one fixture through the instrumented oracle and write a trace file.
+ * Run one fixture through the instrumented reference and write a trace file.
  *
- * Usage: node oracle/run.mjs <fixtureDir> <op> <outFile>
+ * Usage: node reference/run.mjs <fixtureDir> <op> <outFile>
  *
  * Example:
- *   node oracle/instrument.mjs && node oracle/run.mjs windmill-4-blades difference /tmp/out.trace
+ *   node reference/instrument.mjs && node reference/run.mjs windmill-4-blades difference /tmp/out.trace
  */
 
 import { readFileSync } from "fs"
@@ -17,7 +17,7 @@ const REPO = path.resolve(__dirname, "..")
 
 const [, , fixtureDir, op, outFile] = process.argv
 if (!fixtureDir || !op || !outFile) {
-  console.error("Usage: node oracle/run.mjs <fixtureDir> <op> <outFile>")
+  console.error("Usage: node reference/run.mjs <fixtureDir> <op> <outFile>")
   process.exit(1)
 }
 

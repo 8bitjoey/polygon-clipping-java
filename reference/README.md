@@ -1,18 +1,19 @@
-# Oracle — JS Ground-Truth Trace Harness
+# Reference — JS Ground-Truth Trace Harness
 
 Instrumented copy of `upstream/src/` that emits the same trace schema as the Java port.
+Acts as the **test oracle** (trusted ground truth) for the Java port's differential tests.
 
 ## Usage
 
 ```sh
-# 1. Rebuild oracle/src/ from upstream/src/ (re-run whenever upstream changes)
-node oracle/instrument.mjs
+# 1. Rebuild reference/src/ from upstream/src/ (re-run whenever upstream changes)
+node reference/instrument.mjs
 
 # 2. Run a fixture and write a trace file
-node oracle/run.mjs <fixtureDir> <op> <outFile>
+node reference/run.mjs <fixtureDir> <op> <outFile>
 
 # Example
-node oracle/instrument.mjs && node oracle/run.mjs windmill-4-blades difference /tmp/out.trace
+node reference/instrument.mjs && node reference/run.mjs windmill-4-blades difference /tmp/out.trace
 ```
 
 `<op>` is one of: `union`, `intersection`, `xor`, `difference`
@@ -21,7 +22,7 @@ Fixture directories live under `lib/src/test/resources/end-to-end/`.
 
 ## How it works
 
-`instrument.mjs` wipes `oracle/src/`, copies all `.js` files from `upstream/src/`,
+`instrument.mjs` wipes `reference/src/`, copies all `.js` files from `upstream/src/`,
 then applies exact-string patches:
 
 - Rewrites relative imports to add `.js` extensions (ESM requirement)
